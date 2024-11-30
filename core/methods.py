@@ -22,7 +22,7 @@ def sort_by_plz_add_geometry(dfr, dfg, pdict):
     sorted_df2              = sorted_df.merge(df_geo, on=pdict["geocode"], how ='left')
     sorted_df3              = sorted_df2.dropna(subset=['geometry'])
     
-    sorted_df3['geometry']  = gpd.GeoSeries.from_wkt(sorted_df3['geometry'])
+    sorted_df3.loc[:, 'geometry'] = gpd.GeoSeries.from_wkt(sorted_df3['geometry'])
     ret                     = gpd.GeoDataFrame(sorted_df3, geometry='geometry')
     
     return ret
